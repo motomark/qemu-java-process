@@ -1,0 +1,11 @@
+QEMU_CMD="qemu-system-aarch64 \
+  -machine virt,accel=hvf \
+  -cpu host \
+  -smp 4 \
+  -m 4096 \
+  -drive if=pflash,format=raw,readonly=on,file=/opt/homebrew/share/qemu/edk2-aarch64-code.fd \
+  -drive if=pflash,format=raw,file=$edk2-arm-vars.fd \
+  -drive if=virtio,file=disk.qcow2,format=qcow2 \
+  -drive if=virtio,file=seed.iso,format=raw \
+  -netdev user,id=net0,hostfwd=tcp::2222:22 \
+  -device virtio-net-pci,netdev=net0"
